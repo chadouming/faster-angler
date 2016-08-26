@@ -289,6 +289,7 @@ struct msm_fb_data_type {
 	bool allow_bl_update;
 	u32 bl_level_scaled;
 	struct mutex bl_lock;
+	struct mutex sysfs_settings_lock;
 
 	struct platform_device *pdev;
 

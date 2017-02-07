@@ -125,7 +125,7 @@ inline void msm_jpeg_q_init(char const *name, struct msm_jpeg_q *q_p)
 	q_p->unblck = 0;
 }
 
-inline void *msm_jpeg_q_out(struct msm_jpeg_q *q_p)
+static inline void *msm_jpeg_q_out(struct msm_jpeg_q *q_p)
 {
 	unsigned long flags;
 	struct msm_jpeg_q_entry *q_entry_p = NULL;
@@ -248,7 +248,7 @@ inline void msm_jpeg_outbuf_q_cleanup(struct msm_jpeg_device *pgmn_dev,
 	q_p->unblck = 0;
 }
 
-inline void msm_jpeg_q_cleanup(struct msm_jpeg_q *q_p)
+static inline void msm_jpeg_q_cleanup(struct msm_jpeg_q *q_p)
 {
 	void *data;
 	JPEG_DBG("%s:%d] %s\n", __func__, __LINE__, q_p->name);

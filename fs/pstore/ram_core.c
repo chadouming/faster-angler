@@ -46,22 +46,6 @@ static inline size_t buffer_start(struct persistent_ram_zone *prz)
 	return atomic_read(&prz->buffer->start);
 }
 
-/* increase and wrap the start pointer, returning the old value */
-static size_t buffer_start_add_atomic(struct persistent_ram_zone *prz, size_t a)
-{
-	int old;
-	int new;
-
-	do {
-		old = atomic_read(&prz->buffer->start);
-		new = old + a;
-		while (unlikely(new >= prz->buffer_size))
-			new -= prz->buffer_size;
-	} while (atomic_cmpxchg(&prz->buffer->start, old, new) != old);
-
-	return old;
-}
-
 static DEFINE_RAW_SPINLOCK(buffer_lock);
 
 /* increase and wrap the start pointer, returning the old value */

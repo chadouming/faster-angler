@@ -58,7 +58,7 @@ static struct msm_rpm_kvp kvp = {
 
 static int npa_file_read(struct seq_file *m, void *unused)
 {
-	int ret;
+	int ret = 0;
 	struct npa_ver_header ver;
 	struct npa_res res;
 	struct npa_res_client client;
@@ -155,7 +155,7 @@ static int npa_dump_probe(struct platform_device *pdev)
 	struct resource *res;
 	void __iomem *npa_base, *rpm_base;
 	struct dentry *dent;
-	int ret;
+	int ret = 0;
 
 	/* Get the location of the NPA log's start address offset */
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);

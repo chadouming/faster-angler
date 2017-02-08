@@ -695,7 +695,7 @@ void *smem_alloc(unsigned id, unsigned size_in, unsigned to_proc,
 	unsigned long lflags;
 	void *ret = NULL;
 	int rc;
-	unsigned size_out;
+	unsigned size_out = 0;
 	unsigned a_size_in;
 
 	SMEM_DBG("%s(%u, %u, %u, %u)\n", __func__, id, size_in, to_proc,

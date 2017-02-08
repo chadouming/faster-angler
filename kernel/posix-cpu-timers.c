@@ -635,8 +635,8 @@ static int posix_cpu_timer_set(struct k_itimer *timer, int flags,
 			       struct itimerspec *new, struct itimerspec *old)
 {
 	struct task_struct *p = timer->it.cpu.task;
-	unsigned long long old_expires, new_expires, old_incr, val;
-	int ret;
+	unsigned long long old_expires = 0, new_expires = 0, old_incr = 0, val = 0;
+	int ret = 0;
 
 	if (unlikely(p == NULL)) {
 		/*
@@ -785,7 +785,7 @@ static int posix_cpu_timer_set(struct k_itimer *timer, int flags,
 
 static void posix_cpu_timer_get(struct k_itimer *timer, struct itimerspec *itp)
 {
-	unsigned long long now;
+	unsigned long long now = 0;
 	struct task_struct *p = timer->it.cpu.task;
 	int clear_dead;
 
@@ -1060,7 +1060,7 @@ static void check_process_timers(struct task_struct *tsk,
 void posix_cpu_timer_schedule(struct k_itimer *timer)
 {
 	struct task_struct *p = timer->it.cpu.task;
-	unsigned long long now;
+	unsigned long long now = 0;
 
 	if (unlikely(p == NULL))
 		/*
@@ -1272,7 +1272,7 @@ void run_posix_cpu_timers(struct task_struct *tsk)
 void set_process_cpu_timer(struct task_struct *tsk, unsigned int clock_idx,
 			   cputime_t *newval, cputime_t *oldval)
 {
-	unsigned long long now;
+	unsigned long long now = 0;
 
 	BUG_ON(clock_idx == CPUCLOCK_SCHED);
 	cpu_timer_sample_group(clock_idx, tsk, &now);

@@ -1274,7 +1274,6 @@ config PANIC_TIMEOUT
 menuconfig EXPERT
 	bool "Configure standard kernel features (expert users)"
 	# Unhide debug options, to make the on-by-default options visible
-	select DEBUG_KERNEL
 	help
 	  This option allows certain base kernel options and settings
           to be disabled or tweaked. This is for specialized
@@ -1307,7 +1306,7 @@ config SYSCTL_SYSCALL
 
 config KALLSYMS
 	 bool "Load all symbols for debugging/ksymoops" if EXPERT
-	 default y
+	 default n
 	 help
 	   Say Y here to let the kernel print out symbolic crash information and
 	   symbolic stack backtraces. This increases the size of the kernel

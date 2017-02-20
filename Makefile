@@ -246,7 +246,6 @@ export FASTER_FLAGS := \
 	-mcpu=cortex-a57.cortex-a53+crypto \
 	-O3 \
 	-ftracer \
-	-finline-limit=800 \
 	-fgcse-sm \
 	-fgcse-las \
 	-fgcse-after-reload \

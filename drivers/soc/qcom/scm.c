@@ -1101,11 +1101,11 @@ EXPORT_SYMBOL(scm_is_call_available);
 int scm_get_feat_version(u32 feat)
 {
 	struct scm_desc desc = {0};
-	int ret;
+	int ret = 0;
 
 	if (!is_scm_armv8()) {
 		if (scm_is_call_available(SCM_SVC_INFO, GET_FEAT_VERSION_CMD)) {
-			u32 version;
+			u32 version = 0;
 			if (!scm_call(SCM_SVC_INFO, GET_FEAT_VERSION_CMD, &feat,
 				      sizeof(feat), &version, sizeof(version)))
 				return version;

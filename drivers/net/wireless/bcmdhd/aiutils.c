@@ -163,10 +163,10 @@ ai_scan(si_t *sih, void *regs, uint devid)
 	SI_VMSG(("ai_scan: regs = 0x%p, erombase = 0x%08x, eromptr = 0x%p, eromlim = 0x%p\n",
 	         regs, erombase, eromptr, eromlim));
 	while (eromptr < eromlim) {
-		uint32 cia, cib, cid, mfg, crev, nmw, nsw, nmp, nsp;
-		uint32 mpd, asd, addrl, addrh, sizel, sizeh;
-		uint i, j, idx;
-		bool br;
+		uint32 cia = 0, cib = 0, cid = 0, mfg = 0, crev = 0, nmw = 0, nsw = 0, nmp = 0, nsp = 0;
+		uint32 mpd = 0, asd = 0, addrl = 0, addrh = 0, sizel = 0, sizeh = 0;
+		uint i = 0, j = 0, idx = 0;
+		bool br = false;
 
 		br = FALSE;
 

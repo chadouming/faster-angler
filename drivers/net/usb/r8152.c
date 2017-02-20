@@ -491,7 +491,7 @@ int usb_ocp_write(struct r8152 *tp, u16 index, u16 byteen, u16 size, void *data)
 
 static u32 ocp_read_dword(struct r8152 *tp, u16 type, u16 index)
 {
-	u32 data;
+	u32 data = 0;
 
 	if (type == MCU_TYPE_PLA)
 		pla_ocp_read(tp, index, sizeof(data), &data);
@@ -511,7 +511,7 @@ static void ocp_write_dword(struct r8152 *tp, u16 type, u16 index, u32 data)
 
 static u16 ocp_read_word(struct r8152 *tp, u16 type, u16 index)
 {
-	u32 data;
+	u32 data = 0;
 	u8 shift = index & 2;
 
 	index &= ~3;
@@ -530,7 +530,7 @@ static u16 ocp_read_word(struct r8152 *tp, u16 type, u16 index)
 
 static void ocp_write_word(struct r8152 *tp, u16 type, u16 index, u32 data)
 {
-	u32 tmp, mask = 0xffff;
+	u32 tmp = 0, mask = 0xffff;
 	u16 byen = BYTE_EN_WORD;
 	u8 shift = index & 2;
 
@@ -560,7 +560,7 @@ static void ocp_write_word(struct r8152 *tp, u16 type, u16 index, u32 data)
 
 static u8 ocp_read_byte(struct r8152 *tp, u16 type, u16 index)
 {
-	u32 data;
+	u32 data = 0;
 	u8 shift = index & 3;
 
 	index &= ~3;

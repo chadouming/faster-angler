@@ -1950,11 +1950,11 @@ static void low_power_mux_init(void)
 
 static int cpu_clock_8994_driver_probe(struct platform_device *pdev)
 {
-	int ret, cpu;
-	unsigned long a53rate, a57rate, ccirate;
-	bool v2;
+	int ret = 0, cpu = 0;
+	unsigned long a53rate = 0, a57rate = 0, ccirate = 0;
+	bool v2 = false;
 	int pvs_ver = 0;
-	u64 pte_efuse;
+	u64 pte_efuse = 0;
 	char a57speedbinstr[] = "qcom,a57-speedbinXX-vXX";
 	char a53speedbinstr[] = "qcom,a53-speedbinXX-vXX";
 

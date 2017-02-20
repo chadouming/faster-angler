@@ -51,7 +51,7 @@ static struct genl_family nl80211_fam = {
 static struct wireless_dev *
 __cfg80211_wdev_from_attrs(struct net *netns, struct nlattr **attrs)
 {
-	struct cfg80211_registered_device *rdev;
+	struct cfg80211_registered_device *rdev = NULL;
 	struct wireless_dev *result = NULL;
 	bool have_ifidx = attrs[NL80211_ATTR_IFINDEX];
 	bool have_wdev_id = attrs[NL80211_ATTR_WDEV];
@@ -202,7 +202,7 @@ __cfg80211_rdev_from_attrs(struct net *netns, struct nlattr **attrs)
 static struct cfg80211_registered_device *
 cfg80211_get_dev_from_info(struct net *netns, struct genl_info *info)
 {
-	struct cfg80211_registered_device *rdev;
+	struct cfg80211_registered_device *rdev = NULL;
 
 	mutex_lock(&cfg80211_mutex);
 	rdev = __cfg80211_rdev_from_attrs(netns, info->attrs);
@@ -1619,7 +1619,7 @@ static int nl80211_dump_wiphy(struct sk_buff *skb, struct netlink_callback *cb)
 {
 	int idx = 0, ret;
 	int start = cb->args[0];
-	struct cfg80211_registered_device *dev;
+	struct cfg80211_registered_device *dev = NULL;
 	s64 filter_wiphy = -1;
 	bool split = false;
 	struct nlattr **tb;
@@ -1935,7 +1935,7 @@ static int nl80211_set_wds_peer(struct sk_buff *skb, struct genl_info *info)
 
 static int nl80211_set_wiphy(struct sk_buff *skb, struct genl_info *info)
 {
-	struct cfg80211_registered_device *rdev;
+	struct cfg80211_registered_device *rdev = NULL;
 	struct net_device *netdev = NULL;
 	struct wireless_dev *wdev;
 	int result = 0, rem_txq_params = 0;
@@ -2295,7 +2295,7 @@ static int nl80211_dump_interface(struct sk_buff *skb, struct netlink_callback *
 	int if_idx = 0;
 	int wp_start = cb->args[0];
 	int if_start = cb->args[1];
-	struct cfg80211_registered_device *rdev;
+	struct cfg80211_registered_device *rdev = NULL;
 	struct wireless_dev *wdev;
 
 	mutex_lock(&cfg80211_mutex);
@@ -3615,7 +3615,7 @@ static int nl80211_dump_station(struct sk_buff *skb,
 				struct netlink_callback *cb)
 {
 	struct station_info sinfo;
-	struct cfg80211_registered_device *dev;
+	struct cfg80211_registered_device *dev = NULL;
 	struct wireless_dev *wdev;
 	u8 mac_addr[ETH_ALEN];
 	int sta_idx = cb->args[2];
@@ -4324,7 +4324,7 @@ static int nl80211_dump_mpath(struct sk_buff *skb,
 			      struct netlink_callback *cb)
 {
 	struct mpath_info pinfo;
-	struct cfg80211_registered_device *dev;
+	struct cfg80211_registered_device *dev = NULL;
 	struct wireless_dev *wdev;
 	u8 dst[ETH_ALEN];
 	u8 next_hop[ETH_ALEN];
@@ -5886,7 +5886,7 @@ static int nl80211_send_bss(struct sk_buff *msg, struct netlink_callback *cb,
 
 static int nl80211_dump_scan(struct sk_buff *skb, struct netlink_callback *cb)
 {
-	struct cfg80211_registered_device *rdev;
+	struct cfg80211_registered_device *rdev = NULL;
 	struct cfg80211_internal_bss *scan;
 	struct wireless_dev *wdev;
 	int start = cb->args[2], idx = 0;
@@ -5985,7 +5985,7 @@ static int nl80211_dump_survey(struct sk_buff *skb,
 			struct netlink_callback *cb)
 {
 	struct survey_info survey;
-	struct cfg80211_registered_device *dev;
+	struct cfg80211_registered_device *dev = NULL;
 	struct wireless_dev *wdev;
 	int survey_idx = cb->args[2];
 	int res;
@@ -6680,7 +6680,7 @@ static int nl80211_testmode_do(struct sk_buff *skb, struct genl_info *info)
 static int nl80211_testmode_dump(struct sk_buff *skb,
 				 struct netlink_callback *cb)
 {
-	struct cfg80211_registered_device *rdev;
+	struct cfg80211_registered_device *rdev = NULL;
 	int err;
 	long phy_idx;
 	void *data = NULL;
@@ -8694,7 +8694,7 @@ static int nl80211_set_qos_map(struct sk_buff *skb,
 static int nl80211_pre_doit(struct genl_ops *ops, struct sk_buff *skb,
 			    struct genl_info *info)
 {
-	struct cfg80211_registered_device *rdev;
+	struct cfg80211_registered_device *rdev = NULL;
 	struct wireless_dev *wdev;
 	struct net_device *dev;
 	bool rtnl = ops->internal_flags & NL80211_FLAG_NEED_RTNL;
@@ -11076,7 +11076,7 @@ static int nl80211_netlink_notify(struct notifier_block * nb,
 				  void *_notify)
 {
 	struct netlink_notify *notify = _notify;
-	struct cfg80211_registered_device *rdev;
+	struct cfg80211_registered_device *rdev = NULL;
 	struct wireless_dev *wdev;
 	struct cfg80211_beacon_registration *reg, *tmp;
 
@@ -11161,7 +11161,7 @@ EXPORT_SYMBOL(cfg80211_ft_event);
 
 void cfg80211_crit_proto_stopped(struct wireless_dev *wdev, gfp_t gfp)
 {
-	struct cfg80211_registered_device *rdev;
+	struct cfg80211_registered_device *rdev = NULL;
 	struct sk_buff *msg;
 	void *hdr;
 	u32 nlportid;

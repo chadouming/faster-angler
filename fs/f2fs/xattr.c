@@ -410,9 +410,9 @@ int f2fs_getxattr(struct inode *inode, int index, const char *name,
 		void *buffer, size_t buffer_size, struct page *ipage)
 {
 	struct f2fs_xattr_entry *entry;
-	void *base_addr;
+	void *base_addr = NULL;
 	int error = 0;
-	size_t size, len;
+	size_t size = 0, len = 0;
 
 	if (name == NULL)
 		return -EINVAL;
@@ -453,7 +453,7 @@ ssize_t f2fs_listxattr(struct dentry *dentry, char *buffer, size_t buffer_size)
 {
 	struct inode *inode = d_inode(dentry);
 	struct f2fs_xattr_entry *entry;
-	void *base_addr;
+	void *base_addr = NULL;
 	int error = 0;
 	size_t rest = buffer_size;
 
@@ -490,11 +490,11 @@ static int __f2fs_setxattr(struct inode *inode, int index,
 			const char *name, const void *value, size_t size,
 			struct page *ipage, int flags)
 {
-	struct f2fs_xattr_entry *here, *last;
-	void *base_addr;
-	int found, newsize;
-	size_t len;
-	__u32 new_hsize;
+	struct f2fs_xattr_entry *here = NULL, *last = NULL;
+	void *base_addr = NULL;
+	int found = 0, newsize = 0;
+	size_t len = 0;
+	__u32 new_hsize = 0;
 	int error = 0;
 
 	if (name == NULL)

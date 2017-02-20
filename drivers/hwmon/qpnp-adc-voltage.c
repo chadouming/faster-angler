@@ -1162,7 +1162,7 @@ int32_t qpnp_vadc_calib_vref(struct qpnp_vadc_chip *vadc,
 					enum qpnp_adc_calib_type calib_type,
 					int *calib_data)
 {
-	struct qpnp_adc_amux_properties conv;
+	struct qpnp_adc_amux_properties conv = {0};
 	int rc, count = 0, calib_read = 0;
 	u8 status1 = 0;
 
@@ -1211,7 +1211,7 @@ int32_t qpnp_vadc_calib_gnd(struct qpnp_vadc_chip *vadc,
 					enum qpnp_adc_calib_type calib_type,
 					int *calib_data)
 {
-	struct qpnp_adc_amux_properties conv;
+	struct qpnp_adc_amux_properties conv = {0};
 	int rc, count = 0, calib_read = 0;
 	u8 status1 = 0;
 	uint32_t ref_channel_sel = 0;

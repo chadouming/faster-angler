@@ -30,7 +30,7 @@ static int get_device_address(struct smem_client *smem_client,
 		unsigned long flags, enum hal_buffer buffer_type)
 {
 	int rc = 0;
-	int domain, partition;
+	int domain = 0, partition = 0;
 	struct ion_client *clnt = NULL;
 
 	if (!iova || !buffer_size || !hndl || !smem_client) {

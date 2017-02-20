@@ -468,8 +468,8 @@ static void *__smem_get_entry_secure(unsigned id,
 
 static void *__smem_find(unsigned id, unsigned size_in, bool skip_init_check)
 {
-	unsigned size;
-	void *ptr;
+	unsigned size = 0;
+	void *ptr = NULL;
 
 	ptr = __smem_get_entry_nonsecure(id, &size, skip_init_check, true);
 	if (!ptr)
@@ -497,8 +497,8 @@ static void *__smem_find(unsigned id, unsigned size_in, bool skip_init_check)
  */
 void *smem_find(unsigned id, unsigned size_in, unsigned to_proc, unsigned flags)
 {
-	unsigned size;
-	void *ptr;
+	unsigned size = 0;
+	void *ptr = NULL;
 
 	SMEM_DBG("%s(%u, %u, %u, %u)\n", __func__, id, size_in, to_proc,
 									flags);

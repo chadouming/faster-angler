@@ -589,7 +589,7 @@ bcm_atoipv4(const char *p, struct ipv4_addr *ip)
 {
 
 	int i = 0;
-	char *c;
+	char *c = NULL;
 	for (;;) {
 		ip->addr[i++] = (uint8)bcm_strtoul(p, &c, 0);
 		if (*c++ != '.' || i == IPV4_ADDR_LEN)

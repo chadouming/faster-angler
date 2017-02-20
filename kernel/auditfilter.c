@@ -797,8 +797,8 @@ struct audit_entry *audit_dupe_rule(struct audit_krule *old)
 static struct audit_entry *audit_find_rule(struct audit_entry *entry,
 					   struct list_head **p)
 {
-	struct audit_entry *e, *found = NULL;
-	struct list_head *list;
+	struct audit_entry *e = NULL, *found = NULL;
+	struct list_head *list = NULL;
 	int h;
 
 	if (entry->rule.inode_f) {
@@ -835,10 +835,10 @@ static u64 prio_high = ~0ULL/2 - 1;
 /* Add rule to given filterlist if not a duplicate. */
 static inline int audit_add_rule(struct audit_entry *entry)
 {
-	struct audit_entry *e;
+	struct audit_entry *e = NULL;
 	struct audit_watch *watch = entry->rule.watch;
 	struct audit_tree *tree = entry->rule.tree;
-	struct list_head *list;
+	struct list_head *list = NULL;
 	int err;
 #ifdef CONFIG_AUDITSYSCALL
 	int dont_count = 0;
@@ -920,10 +920,10 @@ error:
 /* Remove an existing rule from filterlist. */
 static inline int audit_del_rule(struct audit_entry *entry)
 {
-	struct audit_entry  *e;
+	struct audit_entry  *e = NULL;
 	struct audit_watch *watch = entry->rule.watch;
 	struct audit_tree *tree = entry->rule.tree;
-	struct list_head *list;
+	struct list_head *list = NULL;
 	int ret = 0;
 #ifdef CONFIG_AUDITSYSCALL
 	int dont_count = 0;

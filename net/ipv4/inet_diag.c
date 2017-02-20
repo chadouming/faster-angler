@@ -556,7 +556,7 @@ static int inet_diag_bc_run(const struct nlattr *_bc,
 
 int inet_diag_bc_sk(const struct nlattr *bc, struct sock *sk)
 {
-	struct inet_diag_entry entry;
+	struct inet_diag_entry entry = {0};
 	struct inet_sock *inet = inet_sk(sk);
 
 	if (bc == NULL)
@@ -758,7 +758,7 @@ static int inet_twsk_diag_dump(struct inet_timewait_sock *tw,
 			       const struct nlattr *bc)
 {
 	if (bc != NULL) {
-		struct inet_diag_entry entry;
+		struct inet_diag_entry entry = {0};
 
 		entry.family = tw->tw_family;
 #if IS_ENABLED(CONFIG_IPV6)
@@ -863,7 +863,7 @@ static int inet_diag_fill_req(struct sk_buff *skb, struct sock *sk,
 	r->idiag_inode = 0;
 #if IS_ENABLED(CONFIG_IPV6)
 	if (r->idiag_family == AF_INET6) {
-		struct inet_diag_entry entry;
+		struct inet_diag_entry entry = {0};
 		inet_diag_req_addrs(sk, req, &entry);
 		memcpy(r->id.idiag_src, entry.saddr, sizeof(struct in6_addr));
 		memcpy(r->id.idiag_dst, entry.daddr, sizeof(struct in6_addr));
@@ -878,7 +878,7 @@ static int inet_diag_dump_reqs(struct sk_buff *skb, struct sock *sk,
 			       struct inet_diag_req_v2 *r,
 			       const struct nlattr *bc)
 {
-	struct inet_diag_entry entry;
+	struct inet_diag_entry entry = {0};
 	struct inet_connection_sock *icsk = inet_csk(sk);
 	struct listen_sock *lopt;
 	struct inet_sock *inet = inet_sk(sk);

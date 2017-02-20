@@ -126,7 +126,7 @@ static void async_ctrl_callback(struct urb *urb)
 
 static int get_registers(pegasus_t *pegasus, __u16 indx, __u16 size, void *data)
 {
-	int ret;
+	int ret = 0;
 
 	ret = usb_control_msg(pegasus->usb, usb_rcvctrlpipe(pegasus->usb, 0),
 			      PEGASUS_REQ_GET_REGS, PEGASUS_REQT_READ, 0,
@@ -139,7 +139,7 @@ static int get_registers(pegasus_t *pegasus, __u16 indx, __u16 size, void *data)
 
 static int set_registers(pegasus_t *pegasus, __u16 indx, __u16 size, void *data)
 {
-	int ret;
+	int ret = 0;
 
 	ret = usb_control_msg(pegasus->usb, usb_sndctrlpipe(pegasus->usb, 0),
 			      PEGASUS_REQ_SET_REGS, PEGASUS_REQT_WRITE, 0,
@@ -152,7 +152,7 @@ static int set_registers(pegasus_t *pegasus, __u16 indx, __u16 size, void *data)
 
 static int set_register(pegasus_t *pegasus, __u16 indx, __u8 data)
 {
-	int ret;
+	int ret = 0;
 
 	ret = usb_control_msg(pegasus->usb, usb_sndctrlpipe(pegasus->usb, 0),
 			      PEGASUS_REQ_SET_REG, PEGASUS_REQT_WRITE, data,
@@ -247,7 +247,7 @@ static int write_mii_word(pegasus_t *pegasus, __u8 phy, __u8 indx, __u16 *regd)
 static int mdio_read(struct net_device *dev, int phy_id, int loc)
 {
 	pegasus_t *pegasus = netdev_priv(dev);
-	u16 res;
+	u16 res = 0;
 
 	read_mii_word(pegasus, phy_id, loc, &res);
 	return (int)res;
@@ -343,8 +343,8 @@ fail:
 
 static inline void get_node_id(pegasus_t *pegasus, __u8 *id)
 {
-	int i;
-	__u16 w16;
+	int i = 0;
+	__u16 w16 = 0;
 
 	for (i = 0; i < 3; i++) {
 		read_eprom_word(pegasus, i, &w16);
@@ -394,7 +394,7 @@ static inline int reset_mac(pegasus_t *pegasus)
 		set_register(pegasus, Gpio0, 0x26);
 	}
 	if (usb_dev_id[pegasus->dev_index].vendor == VENDOR_ELCON) {
-		__u16 auxmode;
+		__u16 auxmode = 0;
 		read_mii_word(pegasus, 3, 0x1b, &auxmode);
 		auxmode |= 4;
 		write_mii_word(pegasus, 3, 0x1b, &auxmode);
@@ -405,10 +405,10 @@ static inline int reset_mac(pegasus_t *pegasus)
 
 static int enable_net_traffic(struct net_device *dev, struct usb_device *usb)
 {
-	__u16 linkpart;
-	__u8 data[4];
+	__u16 linkpart = 0;
+	__u8 data[4] = {0};
 	pegasus_t *pegasus = netdev_priv(dev);
-	int ret;
+	int ret = 0;
 
 	read_mii_word(pegasus, pegasus->phy, MII_LPA, &linkpart);
 	data[0] = 0xc9;
@@ -427,7 +427,7 @@ static int enable_net_traffic(struct net_device *dev, struct usb_device *usb)
 	if (usb_dev_id[pegasus->dev_index].vendor == VENDOR_LINKSYS ||
 	    usb_dev_id[pegasus->dev_index].vendor == VENDOR_LINKSYS2 ||
 	    usb_dev_id[pegasus->dev_index].vendor == VENDOR_DLINK) {
-		u16 auxmode;
+		u16 auxmode = 0;
 		read_mii_word(pegasus, 0, 0x1b, &auxmode);
 		auxmode |= 4;
 		write_mii_word(pegasus, 0, 0x1b, &auxmode);
@@ -736,8 +736,8 @@ static inline void disable_net_traffic(pegasus_t *pegasus)
 
 static inline void get_interrupt_interval(pegasus_t *pegasus)
 {
-	u16 data;
-	u8 interval;
+	u16 data = 0;
+	u8 interval = 0;
 
 	read_eprom_word(pegasus, 4, &data);
 	interval = data >> 8;
@@ -759,7 +759,7 @@ static inline void get_interrupt_interval(pegasus_t *pegasus)
 static void set_carrier(struct net_device *net)
 {
 	pegasus_t *pegasus = netdev_priv(net);
-	u16 tmp;
+	u16 tmp = 0;
 
 	if (read_mii_word(pegasus, pegasus->phy, MII_BMSR, &tmp))
 		return;
@@ -1029,8 +1029,8 @@ static void pegasus_set_multicast(struct net_device *net)
 
 static __u8 mii_phy_probe(pegasus_t *pegasus)
 {
-	int i;
-	__u16 tmp;
+	int i = 0;
+	__u16 tmp = 0;
 
 	for (i = 0; i < 32; i++) {
 		read_mii_word(pegasus, i, MII_BMSR, &tmp);

@@ -227,8 +227,8 @@ int fat_get_cluster(struct inode *inode, int cluster, int *fclus, int *dclus)
 {
 	struct super_block *sb = inode->i_sb;
 	const int limit = sb->s_maxbytes >> MSDOS_SB(sb)->cluster_bits;
-	struct fat_entry fatent;
-	struct fat_cache_id cid;
+	struct fat_entry fatent = {0};
+	struct fat_cache_id cid = {0};
 	int nr;
 
 	BUG_ON(MSDOS_I(inode)->i_start == 0);

@@ -293,10 +293,10 @@ static struct tcp_metrics_block *tcp_get_metrics(struct sock *sk,
 						 struct dst_entry *dst,
 						 bool create)
 {
-	struct tcp_metrics_block *tm;
-	struct inetpeer_addr addr;
-	unsigned int hash;
-	struct net *net;
+	struct tcp_metrics_block *tm = NULL;
+	struct inetpeer_addr addr = {0};
+	unsigned int hash = 0;
+	struct net *net = NULL;
 
 	addr.family = sk->sk_family;
 	switch (addr.family) {

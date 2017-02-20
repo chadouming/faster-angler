@@ -873,8 +873,8 @@ done:
 
 static int afe_send_hw_delay(u16 port_id, u32 rate)
 {
-	struct audio_cal_hw_delay_entry		delay_entry;
-	struct afe_audioif_config_command	config;
+	struct audio_cal_hw_delay_entry		delay_entry = {0};
+	struct afe_audioif_config_command	config = {0};
 	int index = 0;
 	int ret = -EINVAL;
 

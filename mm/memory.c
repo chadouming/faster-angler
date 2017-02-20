@@ -1752,7 +1752,7 @@ long __get_user_pages(struct task_struct *tsk, struct mm_struct *mm,
 	i = 0;
 
 	do {
-		struct vm_area_struct *vma;
+		struct vm_area_struct *vma = NULL;
 
 		vma = find_extend_vma(mm, start);
 		if (!vma && in_gate_area(mm, start)) {
@@ -1965,7 +1965,7 @@ EXPORT_SYMBOL(__get_user_pages);
 int fixup_user_fault(struct task_struct *tsk, struct mm_struct *mm,
 		     unsigned long address, unsigned int fault_flags)
 {
-	struct vm_area_struct *vma;
+	struct vm_area_struct *vma = NULL;
 	vm_flags_t vm_flags;
 	int ret;
 
@@ -2082,7 +2082,7 @@ EXPORT_SYMBOL(get_user_pages);
 #ifdef CONFIG_ELF_CORE
 struct page *get_dump_page(unsigned long addr)
 {
-	struct vm_area_struct *vma;
+	struct vm_area_struct *vma = NULL;
 	struct page *page;
 
 	if (__get_user_pages(current, current->mm, addr, 1,
@@ -2940,7 +2940,7 @@ static void unmap_mapping_range_vma(struct vm_area_struct *vma,
 static inline void unmap_mapping_range_tree(struct rb_root *root,
 					    struct zap_details *details)
 {
-	struct vm_area_struct *vma;
+	struct vm_area_struct *vma = NULL;
 	pgoff_t vba, vea, zba, zea;
 
 	vma_interval_tree_foreach(vma, root,
@@ -2966,7 +2966,7 @@ static inline void unmap_mapping_range_tree(struct rb_root *root,
 static inline void unmap_mapping_range_list(struct list_head *head,
 					    struct zap_details *details)
 {
-	struct vm_area_struct *vma;
+	struct vm_area_struct *vma = NULL;
 
 	/*
 	 * In nonlinear VMAs there is no correspondence between virtual address
@@ -4164,7 +4164,7 @@ EXPORT_SYMBOL_GPL(generic_access_phys);
 static int __access_remote_vm(struct task_struct *tsk, struct mm_struct *mm,
 		unsigned long addr, void *buf, int len, int write)
 {
-	struct vm_area_struct *vma;
+	struct vm_area_struct *vma = NULL;
 	void *old_buf = buf;
 
 	down_read(&mm->mmap_sem);
@@ -4262,7 +4262,7 @@ int access_process_vm(struct task_struct *tsk, unsigned long addr,
 void print_vma_addr(char *prefix, unsigned long ip)
 {
 	struct mm_struct *mm = current->mm;
-	struct vm_area_struct *vma;
+	struct vm_area_struct *vma = NULL;
 
 	/*
 	 * Do not print if we are in atomic

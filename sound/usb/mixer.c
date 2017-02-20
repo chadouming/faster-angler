@@ -963,7 +963,7 @@ static int get_min_max_with_quirks(struct usb_mixer_elem_info *cval,
 		 */
 		if (cval->min + cval->res < cval->max) {
 			int last_valid_res = cval->res;
-			int saved, test, check;
+			int saved = 0, test = 0, check = 0;
 			get_cur_mix_raw(cval, minchn, &saved);
 			for (;;) {
 				test = saved;
@@ -1052,7 +1052,7 @@ static int mixer_ctl_feature_info(struct snd_kcontrol *kcontrol, struct snd_ctl_
 static int mixer_ctl_feature_get(struct snd_kcontrol *kcontrol, struct snd_ctl_elem_value *ucontrol)
 {
 	struct usb_mixer_elem_info *cval = kcontrol->private_data;
-	int c, cnt, val, err;
+	int c = 0, cnt = 0, val = 0, err = 0;
 
 	ucontrol->value.integer.value[0] = cval->min;
 	if (cval->cmask) {
@@ -1083,7 +1083,7 @@ static int mixer_ctl_feature_get(struct snd_kcontrol *kcontrol, struct snd_ctl_e
 static int mixer_ctl_feature_put(struct snd_kcontrol *kcontrol, struct snd_ctl_elem_value *ucontrol)
 {
 	struct usb_mixer_elem_info *cval = kcontrol->private_data;
-	int c, cnt, val, oval, err;
+	int c = 0, cnt = 0, val = 0, oval = 0, err = 0;
 	int changed = 0;
 
 	if (cval->cmask) {

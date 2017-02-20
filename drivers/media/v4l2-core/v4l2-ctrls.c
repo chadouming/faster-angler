@@ -2506,7 +2506,7 @@ static int get_ctrl(struct v4l2_ctrl *ctrl, struct v4l2_ext_control *c)
 int v4l2_g_ctrl(struct v4l2_ctrl_handler *hdl, struct v4l2_control *control)
 {
 	struct v4l2_ctrl *ctrl = v4l2_ctrl_find(hdl, control->id);
-	struct v4l2_ext_control c;
+	struct v4l2_ext_control c = {0};
 	int ret;
 
 	if (ctrl == NULL || !type_is_int(ctrl))
@@ -2525,7 +2525,7 @@ EXPORT_SYMBOL(v4l2_subdev_g_ctrl);
 
 s32 v4l2_ctrl_g_ctrl(struct v4l2_ctrl *ctrl)
 {
-	struct v4l2_ext_control c;
+	struct v4l2_ext_control c = {0};
 
 	/* It's a driver bug if this happens. */
 	WARN_ON(!type_is_int(ctrl));
@@ -2537,7 +2537,7 @@ EXPORT_SYMBOL(v4l2_ctrl_g_ctrl);
 
 s64 v4l2_ctrl_g_ctrl_int64(struct v4l2_ctrl *ctrl)
 {
-	struct v4l2_ext_control c;
+	struct v4l2_ext_control c = {0};
 
 	/* It's a driver bug if this happens. */
 	WARN_ON(ctrl->type != V4L2_CTRL_TYPE_INTEGER64);
@@ -2812,8 +2812,8 @@ int v4l2_s_ctrl(struct v4l2_fh *fh, struct v4l2_ctrl_handler *hdl,
 					struct v4l2_control *control)
 {
 	struct v4l2_ctrl *ctrl = v4l2_ctrl_find(hdl, control->id);
-	struct v4l2_ext_control c;
-	int ret;
+	struct v4l2_ext_control c = {0};
+	int ret = 0;
 
 	if (ctrl == NULL || !type_is_int(ctrl))
 		return -EINVAL;
@@ -2836,7 +2836,7 @@ EXPORT_SYMBOL(v4l2_subdev_s_ctrl);
 
 int v4l2_ctrl_s_ctrl(struct v4l2_ctrl *ctrl, s32 val)
 {
-	struct v4l2_ext_control c;
+	struct v4l2_ext_control c = {0};
 
 	/* It's a driver bug if this happens. */
 	WARN_ON(!type_is_int(ctrl));
@@ -2847,7 +2847,7 @@ EXPORT_SYMBOL(v4l2_ctrl_s_ctrl);
 
 int v4l2_ctrl_s_ctrl_int64(struct v4l2_ctrl *ctrl, s64 val)
 {
-	struct v4l2_ext_control c;
+	struct v4l2_ext_control c = {0};
 
 	/* It's a driver bug if this happens. */
 	WARN_ON(ctrl->type != V4L2_CTRL_TYPE_INTEGER64);
@@ -2876,7 +2876,7 @@ int v4l2_ctrl_modify_range(struct v4l2_ctrl *ctrl,
 			s32 min, s32 max, u32 step, s32 def)
 {
 	int ret = check_range(ctrl->type, min, max, step, def);
-	struct v4l2_ext_control c;
+	struct v4l2_ext_control c = {0};
 
 	switch (ctrl->type) {
 	case V4L2_CTRL_TYPE_INTEGER:

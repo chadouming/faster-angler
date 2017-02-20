@@ -348,7 +348,7 @@ static unsigned shmem_find_get_pages_and_swap(struct address_space *mapping,
 	rcu_read_lock();
 restart:
 	radix_tree_for_each_slot(slot, &mapping->page_tree, &iter, start) {
-		struct page *page;
+		struct page *page = NULL;
 repeat:
 		page = radix_tree_deref_slot(slot);
 		if (unlikely(!page))
@@ -920,7 +920,7 @@ static struct page *shmem_swapin(swp_entry_t swap, gfp_t gfp,
 			struct shmem_inode_info *info, pgoff_t index)
 {
 	struct vm_area_struct pvma;
-	struct page *page;
+	struct page *page = NULL;
 
 	/* Create a pseudo vma that just contains the policy */
 	pvma.vm_start = 0;
@@ -941,7 +941,7 @@ static struct page *shmem_alloc_page(gfp_t gfp,
 			struct shmem_inode_info *info, pgoff_t index)
 {
 	struct vm_area_struct pvma;
-	struct page *page;
+	struct page *page = NULL;
 
 	/* Create a pseudo vma that just contains the policy */
 	pvma.vm_start = 0;
@@ -1080,7 +1080,7 @@ static int shmem_getpage_gfp(struct inode *inode, pgoff_t index,
 	struct address_space *mapping = inode->i_mapping;
 	struct shmem_inode_info *info;
 	struct shmem_sb_info *sbinfo;
-	struct page *page;
+	struct page *page = NULL;
 	swp_entry_t swap;
 	int error;
 	int once = 0;
@@ -1677,7 +1677,7 @@ static ssize_t shmem_file_splice_read(struct file *in, loff_t *ppos,
 	unsigned int loff, nr_pages, req_pages;
 	struct page *pages[PIPE_DEF_BUFFERS];
 	struct partial_page partial[PIPE_DEF_BUFFERS];
-	struct page *page;
+	struct page *page = NULL;
 	pgoff_t index, end_index;
 	loff_t isize, left;
 	int error, page_nr;
@@ -1788,7 +1788,7 @@ static ssize_t shmem_file_splice_read(struct file *in, loff_t *ppos,
 static pgoff_t shmem_seek_hole_data(struct address_space *mapping,
 				    pgoff_t index, pgoff_t end, int whence)
 {
-	struct page *page;
+	struct page *page = NULL;
 	struct pagevec pvec;
 	pgoff_t indices[PAGEVEC_SIZE];
 	bool done = false;
@@ -1933,7 +1933,7 @@ static long shmem_fallocate(struct file *file, int mode, loff_t offset,
 	spin_unlock(&inode->i_lock);
 
 	for (index = start; index < end; index++) {
-		struct page *page;
+		struct page *page = NULL;
 
 		/*
 		 * Good, the fallocate(2) manpage permits EINTR: we may have
@@ -2152,7 +2152,7 @@ static int shmem_symlink(struct inode *dir, struct dentry *dentry, const char *s
 	int error;
 	int len;
 	struct inode *inode;
-	struct page *page;
+	struct page *page = NULL;
 	char *kaddr;
 	struct shmem_inode_info *info;
 
@@ -3073,7 +3073,7 @@ struct page *shmem_read_mapping_page_gfp(struct address_space *mapping,
 {
 #ifdef CONFIG_SHMEM
 	struct inode *inode = mapping->host;
-	struct page *page;
+	struct page *page = NULL;
 	int error;
 
 	BUG_ON(mapping->a_ops != &shmem_aops);

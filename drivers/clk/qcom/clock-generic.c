@@ -343,8 +343,8 @@ static int _find_safe_div(struct clk *c, unsigned long rate)
 static int div_set_rate(struct clk *c, unsigned long rate)
 {
 	struct div_clk *d = to_div_clk(c);
-	int safe_div, div, rc = 0;
-	long rrate, old_prate, new_prate;
+	int safe_div = 0, div = 0, rc = 0;
+	long rrate = 0, old_prate = 0, new_prate = 0;
 	struct div_data *data = &d->data;
 
 	rrate = __div_round_rate(data, rate, c->parent, &div, &new_prate);

@@ -2126,17 +2126,17 @@ static int
 dhd_pno_set_for_gscan(dhd_pub_t *dhd, struct dhd_pno_gscan_params *gscan_params)
 {
 	int err = BCME_OK;
-	int mode, i = 0;
+	int mode = 0, i = 0;
 	uint16 _chan_list[WL_NUMCHANNELS];
 	int tot_nchan = 0;
-	int num_buckets_to_fw, tot_num_buckets, gscan_param_size;
+	int num_buckets_to_fw = 0, tot_num_buckets = 0, gscan_param_size = 0;
 	dhd_pno_status_info_t *_pno_state = PNO_GET_PNOSTATE(dhd);
 	wl_pfn_gscan_ch_bucket_cfg_t *ch_bucket = NULL;
 	wl_pfn_gscan_cfg_t *pfn_gscan_cfg_t = NULL;
 	wl_pfn_significant_bssid_t *p_pfn_significant_bssid = NULL;
 	wl_pfn_bssid_t *p_pfn_bssid = NULL;
-	dhd_pno_params_t	*params_legacy;
-	dhd_pno_params_t	*_params;
+	dhd_pno_params_t	*params_legacy = NULL;
+	dhd_pno_params_t	*_params = NULL;
 	bool fw_flushed = FALSE;
 
 	params_legacy = &_pno_state->pno_params_arr[INDEX_OF_LEGACY_PARAMS];

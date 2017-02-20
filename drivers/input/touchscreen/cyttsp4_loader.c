@@ -647,12 +647,12 @@ static int _cyttsp4_load_app(struct cyttsp4_device *ttsp, const u8 * fw,
 			     int fw_size)
 {
 	u8 *p;
-	int ret;
-	int retval;		/* need separate return value at exit stage */
+	int ret = 0;
+	int retval = 0;		/* need separate return value at exit stage */
 	struct cyttsp4_dev_id *file_id = NULL;
 	struct cyttsp4_dev_id *dev_id = NULL;
 	struct cyttsp4_hex_image *row_image = NULL;
-	u8 app_chksum;
+	u8 app_chksum = 0;
 
 	u8 *row_buf = NULL;
 	/* Prevent loading if TMA ver not defined. */

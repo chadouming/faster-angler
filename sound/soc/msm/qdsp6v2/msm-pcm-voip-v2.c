@@ -510,9 +510,9 @@ static void voip_process_dl_pkt(uint8_t *voc_pkt, void *private_data)
 {
 	struct voip_buf_node *buf_node = NULL;
 	struct voip_drv_info *prtd = private_data;
-	unsigned long dsp_flags;
-	uint32_t rate_type;
-	uint32_t frame_rate;
+	unsigned long dsp_flags = 0;
+	uint32_t rate_type = 0;
+	uint32_t frame_rate = 0;
 	u32 pkt_len;
 	u8 *voc_addr = NULL;
 

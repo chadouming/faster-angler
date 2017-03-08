@@ -171,8 +171,8 @@ int cpuidle_idle_call(void)
 {
 	struct cpuidle_device *dev = __this_cpu_read(cpuidle_devices);
 	struct cpuidle_driver *drv = cpuidle_get_cpu_driver(dev);
-	int next_state, entered_state, ret;
-	bool broadcast;
+	int next_state = 0, entered_state = 0, ret = 0;
+	bool broadcast = false;
 
 	if (need_resched()) {
 		local_irq_enable();

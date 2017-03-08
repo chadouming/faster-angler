@@ -437,10 +437,10 @@ static int qcom_ice_clear_irq(struct ice_device *ice_dev)
 static irqreturn_t qcom_ice_isr(int isr, void *data)
 {
 	irqreturn_t retval = IRQ_NONE;
-	unsigned int intr_status, clear_reg;
+	unsigned int intr_status = 0, clear_reg = 0;
 	struct ice_device *ice_dev = data;
-	enum ice_error_code err;
-	unsigned long flags;
+	enum ice_error_code err = {0};
+	unsigned long flags = 0;
 
 	spin_lock_irqsave(&ice_dev->lock, flags);
 	intr_status = qcom_ice_readl(ice_dev, QCOM_ICE_REGS_NON_SEC_IRQ_STTS);

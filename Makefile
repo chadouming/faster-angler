@@ -245,10 +245,8 @@ CONFIG_SHELL := $(shell if [ -x "$$BASH" ]; then echo $$BASH; \
 export FASTER_FLAGS := \
 	-mcpu=cortex-a57.cortex-a53+crypto \
 	-O3 \
-	-ftracer \
-	-fgcse-sm \
-	-fgcse-las \
-	-fgcse-after-reload \
+	-fprofile-use \
+	-ffast-math \
 	-DNDEBUG -g0 \
 	-Werror \
 	-Wno-shift-overflow \

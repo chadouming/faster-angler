@@ -243,7 +243,9 @@ CONFIG_SHELL := $(shell if [ -x "$$BASH" ]; then echo $$BASH; \
 
 # Opimization flags
 export FASTER_FLAGS := \
-	-mcpu=cortex-a57.cortex-a53+crypto -O3 \
+	-mcpu=cortex-a57.cortex-a53+crypto \
+	-O3 \
+	-ffast-math \
 	-DNDEBUG -g0 \
 	-Werror \
 	-Wno-shift-overflow \

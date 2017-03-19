@@ -1840,7 +1840,7 @@ static int mixer_ctl_selector_info(struct snd_kcontrol *kcontrol, struct snd_ctl
 static int mixer_ctl_selector_get(struct snd_kcontrol *kcontrol, struct snd_ctl_elem_value *ucontrol)
 {
 	struct usb_mixer_elem_info *cval = kcontrol->private_data;
-	int val, err;
+	int val = 0, err = 0;
 
 	err = get_cur_ctl_value(cval, cval->control << 8, &val);
 	if (err < 0) {

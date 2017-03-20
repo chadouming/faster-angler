@@ -1594,7 +1594,7 @@ config SLOB
 endchoice
 
 config SLUB_CPU_PARTIAL
-	default y
+	default n
 	depends on SLUB
 	bool "SLUB per cpu partial cache"
 	help

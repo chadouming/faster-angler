@@ -245,7 +245,6 @@ CONFIG_SHELL := $(shell if [ -x "$$BASH" ]; then echo $$BASH; \
 export FASTER_FLAGS := \
 	-mcpu=cortex-a57.cortex-a53+crypto \
 	-O3 \
-	-fprofile-use \
 	-ffast-math \
 	-DNDEBUG -g0 \
 	-Werror \
@@ -386,8 +385,7 @@ KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
 		   -fno-strict-aliasing -fno-common \
 		   -Werror-implicit-function-declaration \
 		   -Wno-format-security \
-		   -fno-delete-null-pointer-checks \
-		   $(FASTER_FLAGS)
+		   -fno-delete-null-pointer-checks
 
 KBUILD_AFLAGS_KERNEL :=
 KBUILD_CFLAGS_KERNEL :=

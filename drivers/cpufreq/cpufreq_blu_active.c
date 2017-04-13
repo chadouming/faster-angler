@@ -70,7 +70,7 @@ static struct mutex gov_lock;
 static unsigned int default_target_loads[] = {DEFAULT_TARGET_LOAD};
 
 #define DEFAULT_TIMER_RATE (20 * USEC_PER_MSEC)
-#define DEFAULT_ABOVE_HISPEED_DELAY DEFAULT_TIMER_RATE
+#define DEFAULT_ABOVE_HISPEED_DELAY (DEFAULT_TIMER_RATE * 2)
 static unsigned int default_above_hispeed_delay[] = {
 	DEFAULT_ABOVE_HISPEED_DELAY };
 
@@ -89,7 +89,7 @@ struct cpufreq_blu_active_tunables {
 	 * The minimum amount of time to spend at a frequency before we can ramp
 	 * down.
 	 */
-#define DEFAULT_MIN_SAMPLE_TIME (80 * USEC_PER_MSEC)
+#define DEFAULT_MIN_SAMPLE_TIME (60 * USEC_PER_MSEC)
 	unsigned long min_sample_time;
 	/*
 	 * The sample rate of the timer used to increase frequency
@@ -1092,8 +1092,9 @@ static struct cpufreq_blu_active_tunables *alloc_tunable(
 	tunables->min_sample_time = DEFAULT_MIN_SAMPLE_TIME;
 	tunables->timer_rate = DEFAULT_TIMER_RATE;
 	tunables->timer_slack_val = DEFAULT_TIMER_SLACK;
-	tunables->fastlane = false;
-	tunables->fastlane_threshold = 50;
+	tunables->fastlane = true;
+	tunables->fastlane_threshold = 99;
+	tunables->io_is_busy = true;
 
 	spin_lock_init(&tunables->target_loads_lock);
 	spin_lock_init(&tunables->above_hispeed_delay_lock);
